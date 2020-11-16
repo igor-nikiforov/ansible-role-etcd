@@ -1,0 +1,28 @@
+---
+galaxy_info:
+  role_name: etcd
+  author: Igor Nikiforov
+  description: Install and configures etcd key-value store
+  license: MIT
+  company: none
+  min_ansible_version: 2.9
+  platforms:
+    - name: Debian
+      versions:
+        - buster
+    - name: Ubuntu
+      versions:
+        - focal
+        - groovy
+    - name: EL
+      versions:
+        - 7
+        - 8
+  galaxy_tags:
+    - etcd
+    - kv
+    - key-value
+    - store
+    - system
+
+dependencies: []

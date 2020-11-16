@@ -1,0 +1,19 @@
+[Unit]
+Description=etcd: A distributed, reliable key-value store for the most critical data of a distributed system
+Documentation=https://github.com/etcd-io/etcd
+After=network.target
+
+[Service]
+User={{ etcd_user }}
+Group={{ etcd_group }}
+ExecStart=/usr/bin/etcd --config-file {{ etcd_conf_dir }}/etcd.yml
+
+Type=notify
+TimeoutStartSec=0
+Restart=on-failure
+RestartSec=30s
+
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

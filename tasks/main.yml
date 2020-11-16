@@ -1,0 +1,68 @@
+---
+- name: Create etcd group
+  group:
+    name: "{{ etcd_group }}"
+
+- name: Create etcd user
+  user:
+    name: "{{ etcd_user }}"
+    group: "{{ etcd_group }}"
+    home: /bin/false
+
+- name: Download and install etcd {{ etcd_version }}
+  unarchive:
+    src: https://github.com/etcd-io/etcd/releases/download/v{{ etcd_version }}/etcd-v{{ etcd_version }}-linux-amd64.tar.gz
+    dest: "/usr/bin"
+    remote_src: True
+    extra_opts:
+      - --strip-components=1
+      - --wildcards
+      - "*/etcd"
+      - "*/etcdctl"
+    owner: "{{ etcd_user }}"
+    group: "{{ etcd_group }}"
+  notify: restart etcd
+
+- name: Create etcd directory structure
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ etcd_user }}"
+    group: "{{ etcd_group }}"
+    recurse: True
+  loop:
+    - "{{ etcd_conf_dir }}/certs"
+    - "{{ etcd_config['data-dir'] }}"
+    - "{{ etcd_config['wal-dir'] }}"
+
+- name: Create etcd systemd service 
+  template:
+    src: etcd.service.j2
+    dest: /etc/systemd/system/etcd.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create etcd configuration file 
+  template:
+    src: etcd.yml.j2
+    dest: "{{ etcd_conf_dir }}/etcd.yml"
+    owner: "{{ etcd_user }}"
+    group: "{{ etcd_group }}"
+    mode: 0644
+  notify: restart etcd
+
+- name: Configure etcdctl connection properties
+  template:
+    src: etcdctl.sh.j2
+    dest: "/etc/profile.d/etcdctl.sh"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Start etcd
+  service:
+    name: etcd
+    state: "{{ etcd_service_state }}"
+    enabled: "{{ etcd_service_enabled }}"
+    daemon_reload: True

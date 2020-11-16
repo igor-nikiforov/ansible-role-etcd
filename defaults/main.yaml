@@ -1,0 +1,16 @@
+---
+etcd_version: "3.4.13"
+
+etcd_user: "etcd"
+
+etcd_group: "etcd"
+
+etcd_conf_dir: "/etc/etcd"
+
+etcd_config: {}
+
+etcd_service_enabled: True
+
+etcd_service_state: "started"
+
+etcdctl_output_format: "table"

@@ -1,0 +1,19 @@
+alias etcdctl="etcdctl -w={{ etcdctl_output_format }}"
+export ETCDCTL_API=3
+{% if etcd_config['discovery-srv'] is defined %}
+export ETCDCTL_DISCOVERY_SRV="{{ etcd_config['discovery-srv'] }}"
+{% else %}
+export ETCDCTL_ENDPOINTS="{{ etcd_config['listen-client-urls'] }}"
+{% endif %}
+{% if etcd_config['discovery-srv-name'] is defined %}
+export ETCDCTL_DISCOVERY_SRV_NAME="{{ etcd_config['discovery-srv-name'] }}"
+{% endif %}
+{% if etcd_config['client-transport-security']['trusted-ca-file'] is defined %}
+export ETCDCTL_CACERT="{{ etcd_config['client-transport-security']['trusted-ca-file'] }}"
+{% endif %}
+{% if etcd_config['client-transport-security']['cert-file'] is defined %}
+export ETCDCTL_CERT="{{ etcd_config['client-transport-security']['cert-file'] }}"
+{% endif %}
+{% if etcd_config['client-transport-security']['key-file'] is defined %}
+export ETCDCTL_KEY="{{ etcd_config['client-transport-security']['key-file'] }}"
+{% endif %}
