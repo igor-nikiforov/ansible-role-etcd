@@ -1,4 +1,5 @@
-# Ansible role for etcd
+# Ansible role: etcd
+
 This role configures etcd and etcdctl on your target host. It supports all etcd configuration options and strives to be as flexible as possible.
 
 ## Requirements
