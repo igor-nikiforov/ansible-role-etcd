@@ -74,8 +74,8 @@ Important:
 - Don't forget to change ```etcd_config.initial-cluster-state``` from ```new``` to ```existing``` in playbook after first execution.
 - Use ```serial: 1``` in your playbook after you build a cluster to safely update it in case of configuration change. More info [here](https://docs.ansible.com/ansible/latest/user_guide/playbooks_strategies.html).
 
-## Examples
-### Static
+### Examples
+#### Static
 
 ```yaml
 # playbook.yml
@@ -116,7 +116,7 @@ Important:
           logger: "zap"
 ```
 
-### DNS discovery
+#### DNS discovery
 
 ```yaml
 # playbook.yml
