@@ -13,7 +13,7 @@
   unarchive:
     src: https://github.com/etcd-io/etcd/releases/download/v{{ etcd_version }}/etcd-v{{ etcd_version }}-linux-amd64.tar.gz
     dest: "/usr/bin"
-    remote_src: True
+    remote_src: true
     extra_opts:
       - --strip-components=1
       - --wildcards
@@ -29,13 +29,13 @@
     state: directory
     owner: "{{ etcd_user }}"
     group: "{{ etcd_group }}"
-    recurse: True
+    recurse: true
   loop:
     - "{{ etcd_conf_dir }}/certs"
     - "{{ etcd_config['data-dir'] }}"
     - "{{ etcd_config['wal-dir'] }}"
 
-- name: Create etcd systemd service 
+- name: Create etcd systemd service
   template:
     src: etcd.service.j2
     dest: /etc/systemd/system/etcd.service
@@ -43,7 +43,7 @@
     group: root
     mode: 0644
 
-- name: Create etcd configuration file 
+- name: Create etcd configuration file
   template:
     src: etcd.yml.j2
     dest: "{{ etcd_conf_dir }}/etcd.yml"
@@ -65,4 +65,4 @@
     name: etcd
     state: "{{ etcd_service_state }}"
     enabled: "{{ etcd_service_enabled }}"
-    daemon_reload: True
+    daemon_reload: true

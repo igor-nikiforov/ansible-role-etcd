@@ -9,7 +9,7 @@ etcd_conf_dir: "/etc/etcd"
 
 etcd_config: {}
 
-etcd_service_enabled: True
+etcd_service_enabled: true
 
 etcd_service_state: "started"
 
