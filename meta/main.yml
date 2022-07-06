@@ -1,6 +1,8 @@
 ---
+# Standards: 0.2
 galaxy_info:
-  role_name: etcd
+  role_name: base_etcd
+  namespace: dockpack
   author: Igor Nikiforov
   description: Install and configures etcd key-value store
   license: MIT
@@ -30,3 +32,4 @@ galaxy_info:
     - system
 
 dependencies: []
+...

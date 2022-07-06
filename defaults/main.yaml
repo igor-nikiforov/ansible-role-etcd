@@ -1,5 +1,7 @@
 ---
 etcd_version: "3.4.13"
+etcd_archive: "etcd-v{{ etcd_version }}-linux-amd64.tar.gz"
+etcd_download_url: "https://github.com/etcd-io/etcd/releases/download"
 
 etcd_user: "etcd"
 
@@ -14,3 +16,4 @@ etcd_service_enabled: true
 etcd_service_state: "started"
 
 etcdctl_output_format: "table"
+...

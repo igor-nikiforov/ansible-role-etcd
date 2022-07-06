@@ -1,5 +1,6 @@
 ---
-- name: restart etcd
+- name: Restart etcd
   service:
     name: etcd
     state: restarted
+...
