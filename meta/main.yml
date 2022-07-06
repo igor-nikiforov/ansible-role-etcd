@@ -1,8 +1,8 @@
 ---
 # Standards: 0.2
 galaxy_info:
-  role_name: base_etcd
-  namespace: dockpack
+  role_name: etcd
+  namespace: igor_nikiforov
   author: Igor Nikiforov
   description: Install and configures etcd key-value store
   license: MIT
@@ -12,10 +12,14 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
+        - bullseye
     - name: Ubuntu
       versions:
         - focal
-        - groovy
+        - jammy
+    - name: Fedora
+      version:
+        - ALL
     - name: EL
       versions:
         - 7
