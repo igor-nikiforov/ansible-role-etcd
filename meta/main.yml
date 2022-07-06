@@ -19,9 +19,13 @@ galaxy_info:
         - 7
         - 8
   galaxy_tags:
+    - cluster
     - etcd
+    - ha
+    - k8s
+    - kubernetes
     - kv
-    - key-value
+    - raft
     - store
     - system
 
