@@ -9,6 +9,16 @@ lint: |
   yamllint .
   ansible-lint
 platforms:
+  - name: etcd-fedora
+    image: dokken/fedora-latest
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: etcd-centos8
     image: quay.io/centos/centos:stream8
     command: /sbin/init
@@ -19,6 +29,40 @@ platforms:
       - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: etcd-bullseye
+    image: dokken/debian-11
+    command: /lib/systemd/systemd
+    privileged: true
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: etcd-buster
+    image: dokken/debian-10
+    command: /lib/systemd/systemd
+    privileged: true
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: etcd-focal
+    image: dokken/ubuntu-20.04
+    command: /lib/systemd/systemd
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+  - name: etcd-jammy
+    image: dokken/ubuntu-22.04
+    command: /lib/systemd/systemd
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
 provisioner:
   name: ansible
   config_options:
