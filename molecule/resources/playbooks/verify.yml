@@ -1,0 +1,34 @@
+---
+# This is a playbook to execute Molecule tests.
+# Standards: 0.2
+- name: Verify
+  hosts: all
+  gather_facts: true
+
+  tasks:
+
+    - name: Gather service facts
+      service_facts:
+
+    - name: What is etcd doing?
+      debug:
+        msg: "etcd is {{ ansible_facts.services['etcd.service'].state }}"
+
+    - name: Assert that etcd service is OK
+      assert:
+        that:
+          - ansible_facts.services['etcd.service'].status == 'enabled'
+          - ansible_facts.services['etcd.service'].state == 'running'
+
+    - name: Check etcd port for clients is listening
+      wait_for:
+        host: "{{ ansible_default_ipv4.address }}"
+        port: 2379
+      register: etcd_client_listening
+
+    - name: Check port for peers is listening
+      wait_for:
+        host: "{{ ansible_default_ipv4.address }}"
+        port: 2380
+      register: etcd_peer_listening
+...
