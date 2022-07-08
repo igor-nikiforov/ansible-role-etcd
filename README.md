@@ -31,9 +31,9 @@ roles:
 
 | Name   | Version             |
 |--------|---------------------|
-| Debian | ```buster```        |
-| Ubuntu | ```focal, groovy``` |
-| CentOS | ```7.4+, 8```       |
+| Debian | ```buster, bullseye```        |
+| Ubuntu | ```focal, jammy``` |
+| CentOS | ```7.4+, stream8```       |
 | RedHat | ```7.4+, 8```       |
 
 Other OS distributions was not tested but will probably work. In case if not please raise a PR!
