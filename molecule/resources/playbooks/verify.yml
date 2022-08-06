@@ -1,0 +1,19 @@
+---
+# Standards: 0.2
+- name: Verify
+  hosts: all
+  become: true
+  vars:
+    etcd_config:
+      data-dir: "/var/lib/etcd/data"
+      wal-dir: "/var/lib/etcd/wal"
+      # yamllint disable-line rule:line-length
+      listen-client-urls: "http://{{ ansible_default_ipv4.address }}:2379,http://127.0.0.1:2379"
+      listen-peer-urls: "http://{{ ansible_default_ipv4.address }}:2380"
+      logger: "zap"
+  tasks:
+    - name: "Include base_etcd"
+      include_role:
+        name: "base_etcd"
+        tasks_from: verify
+...

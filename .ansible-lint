@@ -1,0 +1,4 @@
+---
+skip_list:
+  - experimental   # All rules tagged as experimental
+  - fqcn-builtins  # Use FQCN for builtin actions.

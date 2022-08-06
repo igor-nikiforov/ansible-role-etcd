@@ -1,6 +1,8 @@
 ---
+# Standards: 0.2
 galaxy_info:
   role_name: etcd
+  namespace: igor_nikiforov
   author: Igor Nikiforov
   description: Install and configures etcd key-value store
   license: MIT
@@ -10,19 +12,28 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
+        - bullseye
     - name: Ubuntu
       versions:
         - focal
-        - groovy
+        - jammy
+    - name: Fedora
+      version:
+        - ALL
     - name: EL
       versions:
         - 7
         - 8
   galaxy_tags:
+    - cluster
     - etcd
+    - ha
+    - k8s
+    - kubernetes
     - kv
-    - key-value
+    - raft
     - store
     - system
 
 dependencies: []
+...
